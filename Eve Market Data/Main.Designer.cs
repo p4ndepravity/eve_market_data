@@ -115,6 +115,7 @@
             this.itemsList.Size = new System.Drawing.Size(534, 537);
             this.itemsList.StandardTab = true;
             this.itemsList.TabIndex = 1;
+            this.itemsList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsList_CellContentClick);
             // 
             // id_column
             // 

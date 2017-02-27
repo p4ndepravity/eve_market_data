@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Eve_Market_Data
@@ -14,6 +11,7 @@ namespace Eve_Market_Data
         [STAThread]
         static void Main()
         {
+            //TODO: implement log4net
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main());
