@@ -28,34 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.mainFormMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.items_list = new System.Windows.Forms.DataGridView();
+            this.itemsList = new System.Windows.Forms.DataGridView();
             this.id_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.margin_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.volume_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.items_list)).BeginInit();
+            this.mainFormMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsList)).BeginInit();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // mainFormMenuStrip
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mainFormMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.viewToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(558, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
+            this.mainFormMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.mainFormMenuStrip.Name = "mainFormMenuStrip";
+            this.mainFormMenuStrip.Size = new System.Drawing.Size(558, 24);
+            this.mainFormMenuStrip.TabIndex = 1;
+            this.mainFormMenuStrip.Text = "Main Form Menu";
             // 
             // fileToolStripMenuItem
             // 
@@ -87,34 +87,34 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
-            // items_list
+            // itemsList
             // 
-            this.items_list.AllowUserToAddRows = false;
-            this.items_list.AllowUserToDeleteRows = false;
-            this.items_list.AllowUserToOrderColumns = true;
-            this.items_list.AllowUserToResizeRows = false;
-            this.items_list.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.itemsList.AllowUserToAddRows = false;
+            this.itemsList.AllowUserToDeleteRows = false;
+            this.itemsList.AllowUserToOrderColumns = true;
+            this.itemsList.AllowUserToResizeRows = false;
+            this.itemsList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.items_list.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.items_list.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.items_list.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.items_list.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.itemsList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.itemsList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.itemsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.itemsList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id_column,
             this.name_column,
             this.margin_column,
             this.volume_column});
-            this.items_list.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.items_list.Location = new System.Drawing.Point(12, 27);
-            this.items_list.MultiSelect = false;
-            this.items_list.Name = "items_list";
-            this.items_list.ReadOnly = true;
-            this.items_list.RowHeadersVisible = false;
-            this.items_list.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.items_list.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.items_list.Size = new System.Drawing.Size(534, 537);
-            this.items_list.StandardTab = true;
-            this.items_list.TabIndex = 1;
+            this.itemsList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.itemsList.Location = new System.Drawing.Point(12, 27);
+            this.itemsList.MultiSelect = false;
+            this.itemsList.Name = "itemsList";
+            this.itemsList.ReadOnly = true;
+            this.itemsList.RowHeadersVisible = false;
+            this.itemsList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.itemsList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.itemsList.Size = new System.Drawing.Size(534, 537);
+            this.itemsList.StandardTab = true;
+            this.itemsList.TabIndex = 1;
             // 
             // id_column
             // 
@@ -144,16 +144,16 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(558, 576);
-            this.Controls.Add(this.items_list);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.itemsList);
+            this.Controls.Add(this.mainFormMenuStrip);
+            this.MainMenuStrip = this.mainFormMenuStrip;
             this.Name = "Main";
             this.ShowIcon = false;
             this.Text = "Eve Market Data";
             this.Load += new System.EventHandler(this.Main_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.items_list)).EndInit();
+            this.mainFormMenuStrip.ResumeLayout(false);
+            this.mainFormMenuStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.itemsList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -161,13 +161,13 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip mainFormMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.DataGridView items_list;
+        private System.Windows.Forms.DataGridView itemsList;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_column;
         private System.Windows.Forms.DataGridViewTextBoxColumn name_column;
         private System.Windows.Forms.DataGridViewTextBoxColumn margin_column;
