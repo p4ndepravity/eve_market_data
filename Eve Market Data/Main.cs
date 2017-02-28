@@ -23,7 +23,6 @@ namespace Eve_Market_Data
         static string HIST_ROUTE = API_BASE + "market/10000002/history/?type=" + ITEM_ROUTE;
         static string ALL_ORDERS_ROUTE = API_BASE + "market/10000002/orders/all/";
         static int[] ITEM_ID_RANGE = { 2, 200 };
-        static Dictionary<int, string> itemsIDNames = new Dictionary<int, string>();
 
         public Main()
         {
@@ -33,9 +32,7 @@ namespace Eve_Market_Data
 
         private void Main_Load(object sender, EventArgs e)
         {
-            //TODO: implement timer to repeat the following on specific intervals
-
-            progressBarBGW.RunWorkerAsync();
+            itemLoadProgressBarBGW.RunWorkerAsync();
 
             //TODO: get buy orders for item
 
@@ -44,6 +41,8 @@ namespace Eve_Market_Data
             //TODO: get sell orders for item
 
             //TODO: get lowest sell order by price
+
+            marginBGW.RunWorkerAsync();
 
             //TODO: calculate margin, output to data grid
 
@@ -105,43 +104,50 @@ namespace Eve_Market_Data
                     object[] data = { int.Parse(fields[0]), fields[2] };
                     Invoke((MethodInvoker)delegate { itemsList.Rows.Add(data); });
                     log.Debug(InfoPrepender(string.Format("Adding ({0}){1} to data grid in row {2}", fields[0], fields[2], itemsList.Rows.Count)));
-                    progressBarBGW.ReportProgress((int)((itemsList.Rows.Count / 8490.0) * 100.0));
+                    itemLoadProgressBarBGW.ReportProgress((int)((itemsList.Rows.Count / 8490.0) * 100.0));
                 }
             }
         }
 
-        private void marginThread_Tick(object sender, EventArgs e)
-        {
-            if (marginThread.Enabled) marginThread.Enabled = false;
-            if (marginThread.Enabled) marginThread.Enabled = true;
-        }
-
-        private void volumeThread_Tick(object sender, EventArgs e)
-        {
-            if (volumeThread.Enabled) volumeThread.Enabled = false;
-            if (volumeThread.Enabled) volumeThread.Enabled = true;
-        }
-
-        private void uiThread_Tick(object sender, EventArgs e)
-        {
-            if (uiThread.Enabled) uiThread.Enabled = false;
-            if (uiThread.Enabled) uiThread.Enabled = true;
-        }
-
-        private void progressBarBGW_DoWork(object sender, DoWorkEventArgs e)
+        private void itemLoadProgressBarBGW_DoWork(object sender, DoWorkEventArgs e)
         {
             ReadItemList(sender);
         }
 
-        private void progressBarBGW_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void itemLoadProgressBarBGW_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             uiProgressBar.Value = e.ProgressPercentage;
         }
 
-        private void progressBarBGW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void itemLoadProgressBarBGW_RunWorkerComplete(object sender, RunWorkerCompletedEventArgs e)
         {
             uiProgressBar.Visible = false;
             uiProgressBarStatusLabel.Visible = false;
+        }
+
+        private void marginBGW_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                foreach (DataGridViewRow row in itemsList.Rows)
+                {
+                    int itemID = (int)row.Cells[0].Value;
+                    string buyURL = API_BASE + "/market/10000002/orders/buy/?type=https://crest-tq.eveonline.com/inventory/types/" + itemID.ToString() + "/";
+                    string buyOrdersJson = Get(buyURL);
+                    string sellURL = API_BASE + "/market/10000002/orders/sell/?type=https://crest-tq.eveonline.com/inventory/types/" + itemID.ToString() + "/";
+                    string sellOrdersJson = Get(sellURL);
+                }
+            }
+        }
+
+        private void marginBGW_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+
+        }
+
+        private void marginBGW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
         }
     }
 }

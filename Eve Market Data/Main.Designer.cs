@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.mainFormMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,17 +39,15 @@
             this.name_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.margin_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.volume_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.marginThread = new System.Windows.Forms.Timer(this.components);
-            this.volumeThread = new System.Windows.Forms.Timer(this.components);
-            this.uiThread = new System.Windows.Forms.Timer(this.components);
             this.filterBox = new System.Windows.Forms.GroupBox();
             this.marginFilterPanel = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.marginFilterLabel = new System.Windows.Forms.Label();
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.uiProgressBarStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.uiProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.progressBarBGW = new System.ComponentModel.BackgroundWorker();
+            this.itemLoadProgressBarBGW = new System.ComponentModel.BackgroundWorker();
+            this.marginBGW = new System.ComponentModel.BackgroundWorker();
             this.mainFormMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsList)).BeginInit();
             this.filterBox.SuspendLayout();
@@ -156,19 +153,6 @@
             this.volume_column.Name = "volume_column";
             this.volume_column.ReadOnly = true;
             // 
-            // marginThread
-            // 
-            this.marginThread.Tick += new System.EventHandler(this.marginThread_Tick);
-            // 
-            // volumeThread
-            // 
-            this.volumeThread.Tick += new System.EventHandler(this.volumeThread_Tick);
-            // 
-            // uiThread
-            // 
-            this.uiThread.Enabled = true;
-            this.uiThread.Tick += new System.EventHandler(this.uiThread_Tick);
-            // 
             // filterBox
             // 
             this.filterBox.Controls.Add(this.marginFilterPanel);
@@ -187,6 +171,14 @@
             this.marginFilterPanel.Name = "marginFilterPanel";
             this.marginFilterPanel.Size = new System.Drawing.Size(145, 20);
             this.marginFilterPanel.TabIndex = 0;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(45, 0);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 1;
             // 
             // marginFilterLabel
             // 
@@ -223,21 +215,19 @@
             this.uiProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.uiProgressBar.ToolTipText = "Loading items from database...";
             // 
-            // textBox1
+            // itemLoadProgressBarBGW
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(45, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 1;
+            this.itemLoadProgressBarBGW.WorkerReportsProgress = true;
+            this.itemLoadProgressBarBGW.WorkerSupportsCancellation = true;
+            this.itemLoadProgressBarBGW.DoWork += new System.ComponentModel.DoWorkEventHandler(this.itemLoadProgressBarBGW_DoWork);
+            this.itemLoadProgressBarBGW.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.itemLoadProgressBarBGW_ProgressChanged);
+            this.itemLoadProgressBarBGW.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.itemLoadProgressBarBGW_RunWorkerComplete);
             // 
-            // progressBarBGW
+            // marginBGW
             // 
-            this.progressBarBGW.WorkerReportsProgress = true;
-            this.progressBarBGW.WorkerSupportsCancellation = true;
-            this.progressBarBGW.DoWork += new System.ComponentModel.DoWorkEventHandler(this.progressBarBGW_DoWork);
-            this.progressBarBGW.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.progressBarBGW_ProgressChanged);
-            this.progressBarBGW.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.progressBarBGW_RunWorkerCompleted);
+            this.marginBGW.DoWork += new System.ComponentModel.DoWorkEventHandler(this.marginBGW_DoWork);
+            this.marginBGW.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.marginBGW_ProgressChanged);
+            this.marginBGW.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.marginBGW_RunWorkerCompleted);
             // 
             // Main
             // 
@@ -278,9 +268,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn name_column;
         private System.Windows.Forms.DataGridViewTextBoxColumn margin_column;
         private System.Windows.Forms.DataGridViewTextBoxColumn volume_column;
-        private System.Windows.Forms.Timer marginThread;
-        private System.Windows.Forms.Timer volumeThread;
-        private System.Windows.Forms.Timer uiThread;
         private System.Windows.Forms.GroupBox filterBox;
         private System.Windows.Forms.Panel marginFilterPanel;
         private System.Windows.Forms.Label marginFilterLabel;
@@ -288,7 +275,8 @@
         private System.Windows.Forms.ToolStripStatusLabel uiProgressBarStatusLabel;
         private System.Windows.Forms.ToolStripProgressBar uiProgressBar;
         private System.Windows.Forms.TextBox textBox1;
-        private System.ComponentModel.BackgroundWorker progressBarBGW;
+        private System.ComponentModel.BackgroundWorker itemLoadProgressBarBGW;
+        private System.ComponentModel.BackgroundWorker marginBGW;
     }
 }
 
