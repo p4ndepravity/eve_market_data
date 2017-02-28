@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.mainFormMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,8 +40,22 @@
             this.name_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.margin_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.volume_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marginThread = new System.Windows.Forms.Timer(this.components);
+            this.volumeThread = new System.Windows.Forms.Timer(this.components);
+            this.uiThread = new System.Windows.Forms.Timer(this.components);
+            this.filterBox = new System.Windows.Forms.GroupBox();
+            this.marginFilterPanel = new System.Windows.Forms.Panel();
+            this.marginFilterLabel = new System.Windows.Forms.Label();
+            this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
+            this.uiProgressBarStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.uiProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.progressBarBGW = new System.ComponentModel.BackgroundWorker();
             this.mainFormMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsList)).BeginInit();
+            this.filterBox.SuspendLayout();
+            this.marginFilterPanel.SuspendLayout();
+            this.mainStatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainFormMenuStrip
@@ -105,14 +120,14 @@
             this.margin_column,
             this.volume_column});
             this.itemsList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.itemsList.Location = new System.Drawing.Point(12, 27);
+            this.itemsList.Location = new System.Drawing.Point(12, 200);
             this.itemsList.MultiSelect = false;
             this.itemsList.Name = "itemsList";
             this.itemsList.ReadOnly = true;
             this.itemsList.RowHeadersVisible = false;
             this.itemsList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.itemsList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.itemsList.Size = new System.Drawing.Size(534, 537);
+            this.itemsList.Size = new System.Drawing.Size(534, 351);
             this.itemsList.StandardTab = true;
             this.itemsList.TabIndex = 1;
             this.itemsList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsList_CellContentClick);
@@ -141,10 +156,95 @@
             this.volume_column.Name = "volume_column";
             this.volume_column.ReadOnly = true;
             // 
+            // marginThread
+            // 
+            this.marginThread.Tick += new System.EventHandler(this.marginThread_Tick);
+            // 
+            // volumeThread
+            // 
+            this.volumeThread.Tick += new System.EventHandler(this.volumeThread_Tick);
+            // 
+            // uiThread
+            // 
+            this.uiThread.Enabled = true;
+            this.uiThread.Tick += new System.EventHandler(this.uiThread_Tick);
+            // 
+            // filterBox
+            // 
+            this.filterBox.Controls.Add(this.marginFilterPanel);
+            this.filterBox.Location = new System.Drawing.Point(12, 27);
+            this.filterBox.Name = "filterBox";
+            this.filterBox.Size = new System.Drawing.Size(534, 100);
+            this.filterBox.TabIndex = 2;
+            this.filterBox.TabStop = false;
+            this.filterBox.Text = "Filters";
+            // 
+            // marginFilterPanel
+            // 
+            this.marginFilterPanel.Controls.Add(this.textBox1);
+            this.marginFilterPanel.Controls.Add(this.marginFilterLabel);
+            this.marginFilterPanel.Location = new System.Drawing.Point(6, 19);
+            this.marginFilterPanel.Name = "marginFilterPanel";
+            this.marginFilterPanel.Size = new System.Drawing.Size(145, 20);
+            this.marginFilterPanel.TabIndex = 0;
+            // 
+            // marginFilterLabel
+            // 
+            this.marginFilterLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.marginFilterLabel.AutoSize = true;
+            this.marginFilterLabel.Location = new System.Drawing.Point(0, 3);
+            this.marginFilterLabel.Name = "marginFilterLabel";
+            this.marginFilterLabel.Size = new System.Drawing.Size(39, 13);
+            this.marginFilterLabel.TabIndex = 0;
+            this.marginFilterLabel.Text = "Margin";
+            // 
+            // mainStatusStrip
+            // 
+            this.mainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.uiProgressBarStatusLabel,
+            this.uiProgressBar});
+            this.mainStatusStrip.Location = new System.Drawing.Point(0, 554);
+            this.mainStatusStrip.Name = "mainStatusStrip";
+            this.mainStatusStrip.Size = new System.Drawing.Size(558, 22);
+            this.mainStatusStrip.TabIndex = 3;
+            this.mainStatusStrip.Text = "Status";
+            // 
+            // uiProgressBarStatusLabel
+            // 
+            this.uiProgressBarStatusLabel.Name = "uiProgressBarStatusLabel";
+            this.uiProgressBarStatusLabel.Size = new System.Drawing.Size(82, 17);
+            this.uiProgressBarStatusLabel.Text = "Items Loading";
+            // 
+            // uiProgressBar
+            // 
+            this.uiProgressBar.Name = "uiProgressBar";
+            this.uiProgressBar.Size = new System.Drawing.Size(100, 16);
+            this.uiProgressBar.Step = 1;
+            this.uiProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.uiProgressBar.ToolTipText = "Loading items from database...";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(45, 0);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 1;
+            // 
+            // progressBarBGW
+            // 
+            this.progressBarBGW.WorkerReportsProgress = true;
+            this.progressBarBGW.WorkerSupportsCancellation = true;
+            this.progressBarBGW.DoWork += new System.ComponentModel.DoWorkEventHandler(this.progressBarBGW_DoWork);
+            this.progressBarBGW.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.progressBarBGW_ProgressChanged);
+            this.progressBarBGW.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.progressBarBGW_RunWorkerCompleted);
+            // 
             // Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(558, 576);
+            this.Controls.Add(this.mainStatusStrip);
+            this.Controls.Add(this.filterBox);
             this.Controls.Add(this.itemsList);
             this.Controls.Add(this.mainFormMenuStrip);
             this.MainMenuStrip = this.mainFormMenuStrip;
@@ -155,6 +255,11 @@
             this.mainFormMenuStrip.ResumeLayout(false);
             this.mainFormMenuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsList)).EndInit();
+            this.filterBox.ResumeLayout(false);
+            this.marginFilterPanel.ResumeLayout(false);
+            this.marginFilterPanel.PerformLayout();
+            this.mainStatusStrip.ResumeLayout(false);
+            this.mainStatusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,6 +278,17 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn name_column;
         private System.Windows.Forms.DataGridViewTextBoxColumn margin_column;
         private System.Windows.Forms.DataGridViewTextBoxColumn volume_column;
+        private System.Windows.Forms.Timer marginThread;
+        private System.Windows.Forms.Timer volumeThread;
+        private System.Windows.Forms.Timer uiThread;
+        private System.Windows.Forms.GroupBox filterBox;
+        private System.Windows.Forms.Panel marginFilterPanel;
+        private System.Windows.Forms.Label marginFilterLabel;
+        private System.Windows.Forms.StatusStrip mainStatusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel uiProgressBarStatusLabel;
+        private System.Windows.Forms.ToolStripProgressBar uiProgressBar;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.ComponentModel.BackgroundWorker progressBarBGW;
     }
 }
 
