@@ -4,11 +4,9 @@ using log4net.Config;
 using Microsoft.VisualBasic.FileIO;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -33,6 +31,9 @@ namespace Eve_Market_Data
 
         private void Main_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the '_Eve_Market_Data_TypeContextDataSet.Types' table. You can move, or remove it, as needed.
+            typesTableAdapter.Fill(_Eve_Market_Data_TypeContextDataSet.Types);
+
             itemLoadProgressBarBGW.RunWorkerAsync();
 
             //TODO: get buy orders for item
@@ -43,7 +44,7 @@ namespace Eve_Market_Data
 
             //TODO: get lowest sell order by price
 
-            marginBGW.RunWorkerAsync();
+            //marginBGW.RunWorkerAsync();
 
             //TODO: calculate margin, output to data grid
 
@@ -103,7 +104,7 @@ namespace Eve_Market_Data
                     string[] fields = parser.ReadFields();
                     if (fields[0] == "typeID" || fields[0] == "") continue;
                     object[] data = { int.Parse(fields[0]), fields[2] };
-                    Invoke((MethodInvoker)delegate { itemsList.Rows.Add(data); });
+                    Invoke((MethodInvoker)delegate {  });
                     log.Debug(InfoPrepender(string.Format("Adding ({0}){1} to data grid in row {2}", fields[0], fields[2], itemsList.Rows.Count)));
                     itemLoadProgressBarBGW.ReportProgress((int)((itemsList.Rows.Count / 8490.0) * 100.0));
                 }

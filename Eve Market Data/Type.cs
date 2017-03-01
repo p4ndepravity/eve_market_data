@@ -1,0 +1,15 @@
+﻿using System.Data.Entity;
+
+namespace Eve_Market_Data
+{
+    public class Type
+    {
+        public int TypeId { get; set; }
+        public string TypeName { get; set; }
+    }
+
+    public class TypeContext : DbContext
+    {
+        public DbSet<Type> Types { get; set; }
+    }
+}

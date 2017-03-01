@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.mainFormMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,8 +45,12 @@
             this.uiProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.itemLoadProgressBarBGW = new System.ComponentModel.BackgroundWorker();
             this.marginBGW = new System.ComponentModel.BackgroundWorker();
-            this.id_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._Eve_Market_Data_TypeContextDataSet = new Eve_Market_Data._Eve_Market_Data_TypeContextDataSet();
+            this.typesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.typesTableAdapter = new Eve_Market_Data._Eve_Market_Data_TypeContextDataSetTableAdapters.TypesTableAdapter();
+            this.tableAdapterManager = new Eve_Market_Data._Eve_Market_Data_TypeContextDataSetTableAdapters.TableAdapterManager();
+            this.typeIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.margin_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.volume_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rank_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,6 +59,8 @@
             this.filterBox.SuspendLayout();
             this.marginFilterPanel.SuspendLayout();
             this.mainStatusStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._Eve_Market_Data_TypeContextDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.typesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // mainFormMenuStrip
@@ -109,15 +116,17 @@
             this.itemsList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.itemsList.AutoGenerateColumns = false;
             this.itemsList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.itemsList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.itemsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.itemsList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.id_column,
-            this.name_column,
+            this.typeIdDataGridViewTextBoxColumn,
+            this.typeNameDataGridViewTextBoxColumn,
             this.margin_column,
             this.volume_column,
             this.rank_column});
+            this.itemsList.DataSource = this.typesBindingSource;
             this.itemsList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.itemsList.Location = new System.Drawing.Point(12, 200);
             this.itemsList.MultiSelect = false;
@@ -207,17 +216,39 @@
             this.marginBGW.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.marginBGW_ProgressChanged);
             this.marginBGW.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.marginBGW_RunWorkerCompleted);
             // 
-            // id_column
+            // _Eve_Market_Data_TypeContextDataSet
             // 
-            this.id_column.HeaderText = "ID";
-            this.id_column.Name = "id_column";
-            this.id_column.ReadOnly = true;
+            this._Eve_Market_Data_TypeContextDataSet.DataSetName = "_Eve_Market_Data_TypeContextDataSet";
+            this._Eve_Market_Data_TypeContextDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // name_column
+            // typesBindingSource
             // 
-            this.name_column.HeaderText = "Name";
-            this.name_column.Name = "name_column";
-            this.name_column.ReadOnly = true;
+            this.typesBindingSource.DataMember = "Types";
+            this.typesBindingSource.DataSource = this._Eve_Market_Data_TypeContextDataSet;
+            // 
+            // typesTableAdapter
+            // 
+            this.typesTableAdapter.ClearBeforeFill = true;
+            // 
+            // tableAdapterManager
+            // 
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.TypesTableAdapter = this.typesTableAdapter;
+            this.tableAdapterManager.UpdateOrder = Eve_Market_Data._Eve_Market_Data_TypeContextDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            // 
+            // typeIdDataGridViewTextBoxColumn
+            // 
+            this.typeIdDataGridViewTextBoxColumn.DataPropertyName = "TypeId";
+            this.typeIdDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.typeIdDataGridViewTextBoxColumn.Name = "typeIdDataGridViewTextBoxColumn";
+            this.typeIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // typeNameDataGridViewTextBoxColumn
+            // 
+            this.typeNameDataGridViewTextBoxColumn.DataPropertyName = "TypeName";
+            this.typeNameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.typeNameDataGridViewTextBoxColumn.Name = "typeNameDataGridViewTextBoxColumn";
+            this.typeNameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // margin_column
             // 
@@ -258,6 +289,8 @@
             this.marginFilterPanel.PerformLayout();
             this.mainStatusStrip.ResumeLayout(false);
             this.mainStatusStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._Eve_Market_Data_TypeContextDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.typesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -281,8 +314,12 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.ComponentModel.BackgroundWorker itemLoadProgressBarBGW;
         private System.ComponentModel.BackgroundWorker marginBGW;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id_column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name_column;
+        private _Eve_Market_Data_TypeContextDataSet _Eve_Market_Data_TypeContextDataSet;
+        private System.Windows.Forms.BindingSource typesBindingSource;
+        private _Eve_Market_Data_TypeContextDataSetTableAdapters.TypesTableAdapter typesTableAdapter;
+        private _Eve_Market_Data_TypeContextDataSetTableAdapters.TableAdapterManager tableAdapterManager;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typeIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typeNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn margin_column;
         private System.Windows.Forms.DataGridViewTextBoxColumn volume_column;
         private System.Windows.Forms.DataGridViewTextBoxColumn rank_column;

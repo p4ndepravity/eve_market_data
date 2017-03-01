@@ -22,5 +22,16 @@ namespace Eve_Market_Data.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Eve_Market_Data.TypeContext;In" +
+            "tegrated Security=True")]
+        public string Eve_Market_Data_TypeContextConnectionString {
+            get {
+                return ((string)(this["Eve_Market_Data_TypeContextConnectionString"]));
+            }
+        }
     }
 }
