@@ -98,10 +98,10 @@ namespace Eve_Market_Data
                 uiProgressBar.Value = 0;
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters(",");
-                while (!parser.EndOfData && itemsList.Rows.Count < 500)
+                while (!parser.EndOfData)
                 {
                     string[] fields = parser.ReadFields();
-                    if (fields[0] == "typeID") continue;
+                    if (fields[0] == "typeID" || fields[0] == "") continue;
                     object[] data = { int.Parse(fields[0]), fields[2] };
                     Invoke((MethodInvoker)delegate { itemsList.Rows.Add(data); });
                     log.Debug(InfoPrepender(string.Format("Adding ({0}){1} to data grid in row {2}", fields[0], fields[2], itemsList.Rows.Count)));
@@ -162,14 +162,13 @@ namespace Eve_Market_Data
                     double buyPrice = bestBuy - (bestBuy * .01);
                     double sellPrice = bestSell - (bestSell * .01) - (bestSell * .01);
                     double margin = ((sellPrice - buyPrice) / buyPrice) * 100;
-                    row.Cells[2].Value = string.Format("{0:0.0}%", margin);
-                    if (margin > 5 && margin < 20) row.Cells[4].Value = 5;
-                    else if (margin > 10 && margin < 40) row.Cells[4].Value = 5;
-                    else if (margin > 8 && margin < 45) row.Cells[4].Value = 4;
-                    else if (margin > 6 && margin < 50) row.Cells[4].Value = 3;
-                    else if (margin > 4 && margin < 55) row.Cells[4].Value = 2;
-                    else if (margin > 2 && margin < 60) row.Cells[4].Value = 1;
-                    else row.Cells[4].Value = 0;
+                    row.Cells[2].Value = Math.Round(margin, 1);
+                    if (margin >= 6) row.Cells[4].Value = 1;
+                    if (margin > 8) row.Cells[4].Value = 2;
+                    if (margin > 10) row.Cells[4].Value = 3;
+                    if (margin > 20) row.Cells[4].Value = 4;
+                    if (margin > 40) row.Cells[4].Value = 5;
+                    if (margin < 6 || margin > 100) row.Cells[4].Value = 0;
                 }
             }
         }
