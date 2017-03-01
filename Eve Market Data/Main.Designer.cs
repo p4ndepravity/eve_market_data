@@ -35,20 +35,20 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemsList = new System.Windows.Forms.DataGridView();
+            this.id_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.margin_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.volume_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rank_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.filterBox = new System.Windows.Forms.GroupBox();
             this.marginFilterPanel = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.marginFilterLabel = new System.Windows.Forms.Label();
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.uiProgressBarStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.uiProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.itemLoadProgressBarBGW = new System.ComponentModel.BackgroundWorker();
             this.marginBGW = new System.ComponentModel.BackgroundWorker();
-            this.id_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.margin_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.volume_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rank_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marginFilterText = new System.Windows.Forms.MaskedTextBox();
             this.mainFormMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsList)).BeginInit();
             this.filterBox.SuspendLayout();
@@ -131,6 +131,36 @@
             this.itemsList.TabIndex = 1;
             this.itemsList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsList_CellContentClick);
             // 
+            // id_column
+            // 
+            this.id_column.HeaderText = "ID";
+            this.id_column.Name = "id_column";
+            this.id_column.ReadOnly = true;
+            // 
+            // name_column
+            // 
+            this.name_column.HeaderText = "Name";
+            this.name_column.Name = "name_column";
+            this.name_column.ReadOnly = true;
+            // 
+            // margin_column
+            // 
+            this.margin_column.HeaderText = "Margin";
+            this.margin_column.Name = "margin_column";
+            this.margin_column.ReadOnly = true;
+            // 
+            // volume_column
+            // 
+            this.volume_column.HeaderText = "Volume";
+            this.volume_column.Name = "volume_column";
+            this.volume_column.ReadOnly = true;
+            // 
+            // rank_column
+            // 
+            this.rank_column.HeaderText = "Rank";
+            this.rank_column.Name = "rank_column";
+            this.rank_column.ReadOnly = true;
+            // 
             // filterBox
             // 
             this.filterBox.Controls.Add(this.marginFilterPanel);
@@ -143,20 +173,12 @@
             // 
             // marginFilterPanel
             // 
-            this.marginFilterPanel.Controls.Add(this.textBox1);
+            this.marginFilterPanel.Controls.Add(this.marginFilterText);
             this.marginFilterPanel.Controls.Add(this.marginFilterLabel);
             this.marginFilterPanel.Location = new System.Drawing.Point(6, 19);
             this.marginFilterPanel.Name = "marginFilterPanel";
             this.marginFilterPanel.Size = new System.Drawing.Size(145, 20);
             this.marginFilterPanel.TabIndex = 0;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(45, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 1;
             // 
             // marginFilterLabel
             // 
@@ -207,35 +229,17 @@
             this.marginBGW.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.marginBGW_ProgressChanged);
             this.marginBGW.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.marginBGW_RunWorkerCompleted);
             // 
-            // id_column
+            // marginFilterText
             // 
-            this.id_column.HeaderText = "ID";
-            this.id_column.Name = "id_column";
-            this.id_column.ReadOnly = true;
-            // 
-            // name_column
-            // 
-            this.name_column.HeaderText = "Name";
-            this.name_column.Name = "name_column";
-            this.name_column.ReadOnly = true;
-            // 
-            // margin_column
-            // 
-            this.margin_column.HeaderText = "Margin";
-            this.margin_column.Name = "margin_column";
-            this.margin_column.ReadOnly = true;
-            // 
-            // volume_column
-            // 
-            this.volume_column.HeaderText = "Volume";
-            this.volume_column.Name = "volume_column";
-            this.volume_column.ReadOnly = true;
-            // 
-            // rank_column
-            // 
-            this.rank_column.HeaderText = "Rank";
-            this.rank_column.Name = "rank_column";
-            this.rank_column.ReadOnly = true;
+            this.marginFilterText.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.marginFilterText.HidePromptOnLeave = true;
+            this.marginFilterText.Location = new System.Drawing.Point(45, 0);
+            this.marginFilterText.Mask = "000000000";
+            this.marginFilterText.Name = "marginFilterText";
+            this.marginFilterText.PromptChar = ' ';
+            this.marginFilterText.Size = new System.Drawing.Size(100, 20);
+            this.marginFilterText.TabIndex = 1;
+            this.marginFilterText.TextChanged += new System.EventHandler(this.marginFilterText_TextChanged);
             // 
             // Main
             // 
@@ -278,7 +282,6 @@
         private System.Windows.Forms.StatusStrip mainStatusStrip;
         private System.Windows.Forms.ToolStripStatusLabel uiProgressBarStatusLabel;
         private System.Windows.Forms.ToolStripProgressBar uiProgressBar;
-        private System.Windows.Forms.TextBox textBox1;
         private System.ComponentModel.BackgroundWorker itemLoadProgressBarBGW;
         private System.ComponentModel.BackgroundWorker marginBGW;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_column;
@@ -286,6 +289,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn margin_column;
         private System.Windows.Forms.DataGridViewTextBoxColumn volume_column;
         private System.Windows.Forms.DataGridViewTextBoxColumn rank_column;
+        private System.Windows.Forms.MaskedTextBox marginFilterText;
     }
 }
 

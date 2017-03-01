@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -24,11 +25,13 @@ namespace Eve_Market_Data
         static string HIST_ROUTE = API_BASE + "market/10000002/history/?type=" + ITEM_ROUTE;
         static string ALL_ORDERS_ROUTE = API_BASE + "market/10000002/orders/all/";
         static int[] ITEM_ID_RANGE = { 2, 200 };
+        DatabaseInterface db;
 
         public Main()
         {
             InitializeComponent();
             BasicConfigurator.Configure();
+            db = new DatabaseInterface();
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -181,6 +184,11 @@ namespace Eve_Market_Data
         private void marginBGW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
 
+        }
+
+        private void marginFilterText_TextChanged(object sender, EventArgs e)
+        {
+            (itemsList. as DataTable).DefaultView.RowFilter = string.Format("Field = '{0}'", marginFilterText.Text);
         }
     }
 }
