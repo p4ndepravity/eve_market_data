@@ -188,7 +188,7 @@ namespace Eve_Market_Data
 
         private void marginFilterText_TextChanged(object sender, EventArgs e)
         {
-            (itemsList. as DataTable).DefaultView.RowFilter = string.Format("Field = '{0}'", marginFilterText.Text);
+            (itemsList.DataSource as DataTable).DefaultView.RowFilter = string.Format("Field = '{0}'", marginFilterText.Text);
         }
     }
 }
