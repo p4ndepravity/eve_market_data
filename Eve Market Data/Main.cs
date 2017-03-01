@@ -4,12 +4,10 @@ using log4net.Config;
 using Microsoft.VisualBasic.FileIO;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -25,13 +23,11 @@ namespace Eve_Market_Data
         static string HIST_ROUTE = API_BASE + "market/10000002/history/?type=" + ITEM_ROUTE;
         static string ALL_ORDERS_ROUTE = API_BASE + "market/10000002/orders/all/";
         static int[] ITEM_ID_RANGE = { 2, 200 };
-        DatabaseInterface db;
 
         public Main()
         {
             InitializeComponent();
             BasicConfigurator.Configure();
-            db = new DatabaseInterface();
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -106,6 +102,7 @@ namespace Eve_Market_Data
                     string[] fields = parser.ReadFields();
                     if (fields[0] == "typeID" || fields[0] == "") continue;
                     object[] data = { int.Parse(fields[0]), fields[2] };
+
                     Invoke((MethodInvoker)delegate { itemsList.Rows.Add(data); });
                     log.Debug(InfoPrepender(string.Format("Adding ({0}){1} to data grid in row {2}", fields[0], fields[2], itemsList.Rows.Count)));
                     itemLoadProgressBarBGW.ReportProgress((int)((itemsList.Rows.Count / 8490.0) * 100.0));

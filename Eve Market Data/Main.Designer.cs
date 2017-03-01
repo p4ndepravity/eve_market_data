@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.mainFormMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -35,22 +36,21 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemsList = new System.Windows.Forms.DataGridView();
-            this.id_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.margin_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.volume_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rank_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.filterBox = new System.Windows.Forms.GroupBox();
             this.marginFilterPanel = new System.Windows.Forms.Panel();
+            this.marginFilterText = new System.Windows.Forms.MaskedTextBox();
             this.marginFilterLabel = new System.Windows.Forms.Label();
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.uiProgressBarStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.uiProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.itemLoadProgressBarBGW = new System.ComponentModel.BackgroundWorker();
             this.marginBGW = new System.ComponentModel.BackgroundWorker();
-            this.marginFilterText = new System.Windows.Forms.MaskedTextBox();
             this.mainFormMenuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.itemsList)).BeginInit();
             this.filterBox.SuspendLayout();
             this.marginFilterPanel.SuspendLayout();
             this.mainStatusStrip.SuspendLayout();
@@ -109,12 +109,13 @@
             this.itemsList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.itemsList.AutoGenerateColumns = false;
             this.itemsList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.itemsList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.itemsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.itemsList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.id_column,
-            this.name_column,
+            this.typeIDDataGridViewTextBoxColumn,
+            this.nameDataGridViewTextBoxColumn,
             this.margin_column,
             this.volume_column,
             this.rank_column});
@@ -131,17 +132,19 @@
             this.itemsList.TabIndex = 1;
             this.itemsList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsList_CellContentClick);
             // 
-            // id_column
+            // typeIDDataGridViewTextBoxColumn
             // 
-            this.id_column.HeaderText = "ID";
-            this.id_column.Name = "id_column";
-            this.id_column.ReadOnly = true;
+            this.typeIDDataGridViewTextBoxColumn.DataPropertyName = "typeID";
+            this.typeIDDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.typeIDDataGridViewTextBoxColumn.Name = "typeIDDataGridViewTextBoxColumn";
+            this.typeIDDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // name_column
+            // nameDataGridViewTextBoxColumn
             // 
-            this.name_column.HeaderText = "Name";
-            this.name_column.Name = "name_column";
-            this.name_column.ReadOnly = true;
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // margin_column
             // 
@@ -161,6 +164,10 @@
             this.rank_column.Name = "rank_column";
             this.rank_column.ReadOnly = true;
             // 
+            // 
+            // eveMarketDataDataSet
+            // 
+            // 
             // filterBox
             // 
             this.filterBox.Controls.Add(this.marginFilterPanel);
@@ -179,6 +186,18 @@
             this.marginFilterPanel.Name = "marginFilterPanel";
             this.marginFilterPanel.Size = new System.Drawing.Size(145, 20);
             this.marginFilterPanel.TabIndex = 0;
+            // 
+            // marginFilterText
+            // 
+            this.marginFilterText.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.marginFilterText.HidePromptOnLeave = true;
+            this.marginFilterText.Location = new System.Drawing.Point(45, 0);
+            this.marginFilterText.Mask = "000000000";
+            this.marginFilterText.Name = "marginFilterText";
+            this.marginFilterText.PromptChar = ' ';
+            this.marginFilterText.Size = new System.Drawing.Size(100, 20);
+            this.marginFilterText.TabIndex = 1;
+            this.marginFilterText.TextChanged += new System.EventHandler(this.marginFilterText_TextChanged);
             // 
             // marginFilterLabel
             // 
@@ -229,18 +248,6 @@
             this.marginBGW.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.marginBGW_ProgressChanged);
             this.marginBGW.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.marginBGW_RunWorkerCompleted);
             // 
-            // marginFilterText
-            // 
-            this.marginFilterText.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.marginFilterText.HidePromptOnLeave = true;
-            this.marginFilterText.Location = new System.Drawing.Point(45, 0);
-            this.marginFilterText.Mask = "000000000";
-            this.marginFilterText.Name = "marginFilterText";
-            this.marginFilterText.PromptChar = ' ';
-            this.marginFilterText.Size = new System.Drawing.Size(100, 20);
-            this.marginFilterText.TabIndex = 1;
-            this.marginFilterText.TextChanged += new System.EventHandler(this.marginFilterText_TextChanged);
-            // 
             // Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -284,12 +291,13 @@
         private System.Windows.Forms.ToolStripProgressBar uiProgressBar;
         private System.ComponentModel.BackgroundWorker itemLoadProgressBarBGW;
         private System.ComponentModel.BackgroundWorker marginBGW;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id_column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name_column;
+        private System.Windows.Forms.MaskedTextBox marginFilterText;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typeIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn margin_column;
         private System.Windows.Forms.DataGridViewTextBoxColumn volume_column;
         private System.Windows.Forms.DataGridViewTextBoxColumn rank_column;
-        private System.Windows.Forms.MaskedTextBox marginFilterText;
+        private System.Windows.Forms.BindingSource itemsBindingSource;
     }
 }
 
