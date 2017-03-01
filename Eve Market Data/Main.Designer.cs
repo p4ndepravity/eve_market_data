@@ -35,10 +35,6 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemsList = new System.Windows.Forms.DataGridView();
-            this.id_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.margin_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.volume_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.filterBox = new System.Windows.Forms.GroupBox();
             this.marginFilterPanel = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -48,6 +44,11 @@
             this.uiProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.itemLoadProgressBarBGW = new System.ComponentModel.BackgroundWorker();
             this.marginBGW = new System.ComponentModel.BackgroundWorker();
+            this.id_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.margin_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.volume_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rank_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mainFormMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsList)).BeginInit();
             this.filterBox.SuspendLayout();
@@ -115,7 +116,8 @@
             this.id_column,
             this.name_column,
             this.margin_column,
-            this.volume_column});
+            this.volume_column,
+            this.rank_column});
             this.itemsList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.itemsList.Location = new System.Drawing.Point(12, 200);
             this.itemsList.MultiSelect = false;
@@ -128,30 +130,6 @@
             this.itemsList.StandardTab = true;
             this.itemsList.TabIndex = 1;
             this.itemsList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsList_CellContentClick);
-            // 
-            // id_column
-            // 
-            this.id_column.HeaderText = "ID";
-            this.id_column.Name = "id_column";
-            this.id_column.ReadOnly = true;
-            // 
-            // name_column
-            // 
-            this.name_column.HeaderText = "Name";
-            this.name_column.Name = "name_column";
-            this.name_column.ReadOnly = true;
-            // 
-            // margin_column
-            // 
-            this.margin_column.HeaderText = "Margin";
-            this.margin_column.Name = "margin_column";
-            this.margin_column.ReadOnly = true;
-            // 
-            // volume_column
-            // 
-            this.volume_column.HeaderText = "Volume";
-            this.volume_column.Name = "volume_column";
-            this.volume_column.ReadOnly = true;
             // 
             // filterBox
             // 
@@ -229,6 +207,36 @@
             this.marginBGW.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.marginBGW_ProgressChanged);
             this.marginBGW.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.marginBGW_RunWorkerCompleted);
             // 
+            // id_column
+            // 
+            this.id_column.HeaderText = "ID";
+            this.id_column.Name = "id_column";
+            this.id_column.ReadOnly = true;
+            // 
+            // name_column
+            // 
+            this.name_column.HeaderText = "Name";
+            this.name_column.Name = "name_column";
+            this.name_column.ReadOnly = true;
+            // 
+            // margin_column
+            // 
+            this.margin_column.HeaderText = "Margin";
+            this.margin_column.Name = "margin_column";
+            this.margin_column.ReadOnly = true;
+            // 
+            // volume_column
+            // 
+            this.volume_column.HeaderText = "Volume";
+            this.volume_column.Name = "volume_column";
+            this.volume_column.ReadOnly = true;
+            // 
+            // rank_column
+            // 
+            this.rank_column.HeaderText = "Rank";
+            this.rank_column.Name = "rank_column";
+            this.rank_column.ReadOnly = true;
+            // 
             // Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -264,10 +272,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.DataGridView itemsList;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id_column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name_column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn margin_column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn volume_column;
         private System.Windows.Forms.GroupBox filterBox;
         private System.Windows.Forms.Panel marginFilterPanel;
         private System.Windows.Forms.Label marginFilterLabel;
@@ -277,6 +281,11 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.ComponentModel.BackgroundWorker itemLoadProgressBarBGW;
         private System.ComponentModel.BackgroundWorker marginBGW;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name_column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn margin_column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn volume_column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rank_column;
     }
 }
 

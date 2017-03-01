@@ -1,10 +1,11 @@
-﻿using Eve_Market_Data.IDItemInfoJsonTypes;
+﻿using Eve_Market_Data.ItemOrderListPageJsonTypes;
 using log4net;
 using log4net.Config;
 using Microsoft.VisualBasic.FileIO;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -97,7 +98,7 @@ namespace Eve_Market_Data
                 uiProgressBar.Value = 0;
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters(",");
-                while (!parser.EndOfData && itemsList.Rows.Count < 2500)
+                while (!parser.EndOfData && itemsList.Rows.Count < 500)
                 {
                     string[] fields = parser.ReadFields();
                     if (fields[0] == "typeID") continue;
@@ -127,6 +128,8 @@ namespace Eve_Market_Data
 
         private void marginBGW_DoWork(object sender, DoWorkEventArgs e)
         {
+            Collection<ItemOrderListPageJsonTypes.Item> buyOrders = new Collection<ItemOrderListPageJsonTypes.Item>();
+            Collection<ItemOrderListPageJsonTypes.Item> sellOrders = new Collection<ItemOrderListPageJsonTypes.Item>();
             while (true)
             {
                 foreach (DataGridViewRow row in itemsList.Rows)
@@ -134,8 +137,39 @@ namespace Eve_Market_Data
                     int itemID = (int)row.Cells[0].Value;
                     string buyURL = API_BASE + "/market/10000002/orders/buy/?type=https://crest-tq.eveonline.com/inventory/types/" + itemID.ToString() + "/";
                     string buyOrdersJson = Get(buyURL);
+                    ItemOrderListPage buyOrdersListPage = JsonConvert.DeserializeObject<ItemOrderListPage>(buyOrdersJson);
+                    double bestBuy = 0.0;
+                    foreach (Item item in buyOrdersListPage.Items)
+                    {
+                        if (item.Price > bestBuy)
+                        {
+                            bestBuy = item.Price;
+                        }
+                    }
+
                     string sellURL = API_BASE + "/market/10000002/orders/sell/?type=https://crest-tq.eveonline.com/inventory/types/" + itemID.ToString() + "/";
                     string sellOrdersJson = Get(sellURL);
+                    ItemOrderListPage sellOrdersListPage = JsonConvert.DeserializeObject<ItemOrderListPage>(sellOrdersJson);
+                    double bestSell = 9999999999.9;
+                    foreach (Item item in sellOrdersListPage.Items)
+                    {
+                        if (item.Price < bestSell)
+                        {
+                            bestSell = item.Price;
+                        }
+                    }
+
+                    double buyPrice = bestBuy - (bestBuy * .01);
+                    double sellPrice = bestSell - (bestSell * .01) - (bestSell * .01);
+                    double margin = ((sellPrice - buyPrice) / buyPrice) * 100;
+                    row.Cells[2].Value = string.Format("{0:0.0}%", margin);
+                    if (margin > 5 && margin < 20) row.Cells[4].Value = 5;
+                    else if (margin > 10 && margin < 40) row.Cells[4].Value = 5;
+                    else if (margin > 8 && margin < 45) row.Cells[4].Value = 4;
+                    else if (margin > 6 && margin < 50) row.Cells[4].Value = 3;
+                    else if (margin > 4 && margin < 55) row.Cells[4].Value = 2;
+                    else if (margin > 2 && margin < 60) row.Cells[4].Value = 1;
+                    else row.Cells[4].Value = 0;
                 }
             }
         }
