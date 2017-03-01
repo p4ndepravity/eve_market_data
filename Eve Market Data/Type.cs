@@ -5,6 +5,7 @@ namespace Eve_Market_Data
     public class Type
     {
         public int TypeId { get; set; }
+        public int TypeIdInGame { get; set; }
         public string TypeName { get; set; }
     }
 

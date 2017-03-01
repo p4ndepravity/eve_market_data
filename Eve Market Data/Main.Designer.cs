@@ -45,8 +45,8 @@
             this.uiProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.itemLoadProgressBarBGW = new System.ComponentModel.BackgroundWorker();
             this.marginBGW = new System.ComponentModel.BackgroundWorker();
-            this._Eve_Market_Data_TypeContextDataSet = new Eve_Market_Data._Eve_Market_Data_TypeContextDataSet();
             this.typesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this._Eve_Market_Data_TypeContextDataSet = new Eve_Market_Data._Eve_Market_Data_TypeContextDataSet();
             this.typesTableAdapter = new Eve_Market_Data._Eve_Market_Data_TypeContextDataSetTableAdapters.TypesTableAdapter();
             this.tableAdapterManager = new Eve_Market_Data._Eve_Market_Data_TypeContextDataSetTableAdapters.TableAdapterManager();
             this.typeIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,8 +59,8 @@
             this.filterBox.SuspendLayout();
             this.marginFilterPanel.SuspendLayout();
             this.mainStatusStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._Eve_Market_Data_TypeContextDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.typesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._Eve_Market_Data_TypeContextDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // mainFormMenuStrip
@@ -216,15 +216,15 @@
             this.marginBGW.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.marginBGW_ProgressChanged);
             this.marginBGW.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.marginBGW_RunWorkerCompleted);
             // 
-            // _Eve_Market_Data_TypeContextDataSet
-            // 
-            this._Eve_Market_Data_TypeContextDataSet.DataSetName = "_Eve_Market_Data_TypeContextDataSet";
-            this._Eve_Market_Data_TypeContextDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // typesBindingSource
             // 
             this.typesBindingSource.DataMember = "Types";
             this.typesBindingSource.DataSource = this._Eve_Market_Data_TypeContextDataSet;
+            // 
+            // _Eve_Market_Data_TypeContextDataSet
+            // 
+            this._Eve_Market_Data_TypeContextDataSet.DataSetName = "_Eve_Market_Data_TypeContextDataSet";
+            this._Eve_Market_Data_TypeContextDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // typesTableAdapter
             // 
@@ -238,7 +238,7 @@
             // 
             // typeIdDataGridViewTextBoxColumn
             // 
-            this.typeIdDataGridViewTextBoxColumn.DataPropertyName = "TypeId";
+            this.typeIdDataGridViewTextBoxColumn.DataPropertyName = "TypeIdInGame";
             this.typeIdDataGridViewTextBoxColumn.HeaderText = "ID";
             this.typeIdDataGridViewTextBoxColumn.Name = "typeIdDataGridViewTextBoxColumn";
             this.typeIdDataGridViewTextBoxColumn.ReadOnly = true;
@@ -289,8 +289,8 @@
             this.marginFilterPanel.PerformLayout();
             this.mainStatusStrip.ResumeLayout(false);
             this.mainStatusStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this._Eve_Market_Data_TypeContextDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.typesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._Eve_Market_Data_TypeContextDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

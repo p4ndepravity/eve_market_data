@@ -117,37 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="mainFormMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="margin_column.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="volume_column.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="rank_column.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="typesBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>895, 17</value>
-  </metadata>
-  <metadata name="_Eve_Market_Data_TypeContextDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>629, 17</value>
-  </metadata>
-  <metadata name="mainStatusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>181, 17</value>
-  </metadata>
-  <metadata name="itemLoadProgressBarBGW.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>318, 17</value>
-  </metadata>
-  <metadata name="marginBGW.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>512, 17</value>
-  </metadata>
-  <metadata name="typesTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 56</value>
-  </metadata>
-  <metadata name="tableAdapterManager.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>171, 56</value>
-  </metadata>
+  <data name="Target" xml:space="preserve">
+    <value>H4sIAAAAAAAEAM1Xy27jNhTdF+g/EFy1QMbMY9MG0gxSJymMjpNglJntgJauHWL4UEnKsL+ti35Sf6GXeluy4yQt0MIb6fLy8NzD+5D/+uPP6MNGSbIG64TRMT2bnFICOjWZ0KuYFn757if64f3330U3mdqQL43fRfDDndrF9Mn7/JIxlz6B4m6iRGqNM0s/SY1iPDPs/PT0Z3Z2xgAhKGIREn0qtBcKyhd8nRqdQu4LLucmA+lqO64kJSq54wpczlOI6c0avs65/Qb+6zX3nJIrKTjSSEAuKeFaG889krz87CDx1uhVkqOBy8dtDui35NJBTf6yc39pHKfnIQ7WbWyg0sJ5o14JeHZRC8OG298kL22FQ+luUGK/DVGX8sU0PFIyPOhyKm1YGSk7CdYTglZSWUmwnrRJgLkSfidkWkhfWIg1FN5yeUIeioUU6W+wfTTfQMe6kLLPDLnh2o4BTQ/W5GD99hMse3xnGSVsdy8bbm63DvZVUc20vzin5A5J8IWENgF6CiTeWPgVNFjuIXvg3oPF+5tlUEo4YrDnvPDUnIhZh9VDUbXNR9Ar/xRTfKTkVmwgayw1i89aYLHhJm8L2D0oYt0Nju8VS8ZzgZR7JIINNn7PHWMt1Nfs6qN2I6owE7zjDs1R0hGo6mtSpdA+li2frnZZVbxNkbMDVR7NeZ6jYL2qry0kqUp++i55fTmoCoOlbk9VtGzbkzAF+AoGq3g0Mr0V1vmQ+wsermyaqZFbX/0DyjYn9QUe1kCnd+Pd5Nb+6hwCdNLdYjQK07cMDFoSdRMYbSs7LZfcHiilqZGF0s+V5TGUqkCGOJV1jBSxQRxDpdhIqkGTGOr+XMoOXdrT29QdpGhUp8vxaTXKn8qFEpRoLbKQO8nWeVCT8lKT3+VUCoy3c5hzLZbgfNVLKc6M88HM+//MH+ZcJl8whP6zYSCCskfb/WhWvK7/6zW36RO3Pyi++bGP9k97/LgZHe/iB5t4lYgxzRYGiVcE67b/xv4+LoqI9T/0omtwYtVBhM8+DWnItg608ZnppWl0xoj6jBqXwTXMwfMMhbmyXix56nE5BefKUfyFyyL0ULWAbKbvC58X/so5UAu5M94j9vz55RDb5Rzd5+HN/RshIE2BIcC9/qUQMmt5347T8BBEyJE6t5EVfoog3GrbIt0Z/UKgWr5ryEGHyngElUsEc/c64Wt4Czf8CvkIK55um952GOT4RezKHl0LvrJcuRqj2x/+vLDw7+X933j502LvDAAA</value>
+  </data>
+  <data name="DefaultSchema" xml:space="preserve">
+    <value>dbo</value>
+  </data>
 </root>

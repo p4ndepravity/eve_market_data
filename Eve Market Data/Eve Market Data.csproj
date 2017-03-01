@@ -67,6 +67,15 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703011838274_InitialCreate.cs" />
+    <Compile Include="Migrations\201703011838274_InitialCreate.Designer.cs">
+      <DependentUpon>201703011838274_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703011914539_AddTypeIdInGame.cs" />
+    <Compile Include="Migrations\201703011914539_AddTypeIdInGame.Designer.cs">
+      <DependentUpon>201703011914539_AddTypeIdInGame.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Type.cs" />
@@ -77,6 +86,12 @@
     </Compile>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703011838274_InitialCreate.resx">
+      <DependentUpon>201703011838274_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703011914539_AddTypeIdInGame.resx">
+      <DependentUpon>201703011914539_AddTypeIdInGame.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

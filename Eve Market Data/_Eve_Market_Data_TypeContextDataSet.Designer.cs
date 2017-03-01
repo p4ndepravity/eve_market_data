@@ -283,6 +283,8 @@ namespace Eve_Market_Data {
             
             private global::System.Data.DataColumn columnTypeName;
             
+            private global::System.Data.DataColumn columnTypeIdInGame;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public TypesDataTable() {
@@ -334,6 +336,14 @@ namespace Eve_Market_Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TypeIdInGameColumn {
+                get {
+                    return this.columnTypeIdInGame;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -369,11 +379,12 @@ namespace Eve_Market_Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public TypesRow AddTypesRow(string TypeName) {
+            public TypesRow AddTypesRow(string TypeName, int TypeIdInGame) {
                 TypesRow rowTypesRow = ((TypesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
-                        TypeName};
+                        TypeName,
+                        TypeIdInGame};
                 rowTypesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTypesRow);
                 return rowTypesRow;
@@ -405,6 +416,7 @@ namespace Eve_Market_Data {
             internal void InitVars() {
                 this.columnTypeId = base.Columns["TypeId"];
                 this.columnTypeName = base.Columns["TypeName"];
+                this.columnTypeIdInGame = base.Columns["TypeIdInGame"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -414,15 +426,24 @@ namespace Eve_Market_Data {
                 base.Columns.Add(this.columnTypeId);
                 this.columnTypeName = new global::System.Data.DataColumn("TypeName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTypeName);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                this.columnTypeIdInGame = new global::System.Data.DataColumn("TypeIdInGame", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTypeIdInGame);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint2", new global::System.Data.DataColumn[] {
+                                this.columnTypeName}, false));
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint3", new global::System.Data.DataColumn[] {
                                 this.columnTypeId}, true));
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint4", new global::System.Data.DataColumn[] {
+                                this.columnTypeIdInGame}, false));
                 this.columnTypeId.AutoIncrement = true;
                 this.columnTypeId.AutoIncrementSeed = -1;
                 this.columnTypeId.AutoIncrementStep = -1;
                 this.columnTypeId.AllowDBNull = false;
                 this.columnTypeId.ReadOnly = true;
                 this.columnTypeId.Unique = true;
+                this.columnTypeName.Unique = true;
                 this.columnTypeName.MaxLength = 2147483647;
+                this.columnTypeIdInGame.AllowDBNull = false;
+                this.columnTypeIdInGame.Unique = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -587,6 +608,17 @@ namespace Eve_Market_Data {
                 }
                 set {
                     this[this.tableTypes.TypeNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int TypeIdInGame {
+                get {
+                    return ((int)(this[this.tableTypes.TypeIdInGameColumn]));
+                }
+                set {
+                    this[this.tableTypes.TypeIdInGameColumn] = value;
                 }
             }
             
@@ -764,25 +796,33 @@ namespace Eve_Market_Data._Eve_Market_Data_TypeContextDataSetTableAdapters {
             tableMapping.DataSetTable = "Types";
             tableMapping.ColumnMappings.Add("TypeId", "TypeId");
             tableMapping.ColumnMappings.Add("TypeName", "TypeName");
+            tableMapping.ColumnMappings.Add("TypeIdInGame", "TypeIdInGame");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Types] WHERE (([TypeId] = @Original_TypeId))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [Types] WHERE (([TypeId] = @Original_TypeId) AND ([TypeIdInGame] = @O" +
+                "riginal_TypeIdInGame))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TypeId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TypeId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TypeIdInGame", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TypeIdInGame", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Types] ([TypeName]) VALUES (@TypeName);\r\nSELECT TypeId, TypeNa" +
-                "me FROM Types WHERE (TypeId = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [Types] ([TypeName], [TypeIdInGame]) VALUES (@TypeName, @TypeIdInGame" +
+                ");\r\nSELECT TypeId, TypeName, TypeIdInGame FROM Types WHERE (TypeId = SCOPE_IDENT" +
+                "ITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TypeName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TypeName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TypeIdInGame", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TypeIdInGame", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[Types] SET [TypeName] = @TypeName WHERE (([TypeId] = @Original_Type" +
-                "Id));\r\nSELECT TypeId, TypeName FROM Types WHERE (TypeId = @TypeId)";
+            this._adapter.UpdateCommand.CommandText = "UPDATE [Types] SET [TypeName] = @TypeName, [TypeIdInGame] = @TypeIdInGame WHERE (" +
+                "([TypeId] = @Original_TypeId) AND ([TypeIdInGame] = @Original_TypeIdInGame));\r\nS" +
+                "ELECT TypeId, TypeName, TypeIdInGame FROM Types WHERE (TypeId = @TypeId)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TypeName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TypeName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TypeIdInGame", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TypeIdInGame", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TypeId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TypeId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TypeIdInGame", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TypeIdInGame", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TypeId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "TypeId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -799,7 +839,7 @@ namespace Eve_Market_Data._Eve_Market_Data_TypeContextDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT TypeId, TypeName FROM dbo.Types";
+            this._commandCollection[0].CommandText = "SELECT TypeId, TypeName, TypeIdInGame FROM Types";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -860,8 +900,9 @@ namespace Eve_Market_Data._Eve_Market_Data_TypeContextDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_TypeId) {
+        public virtual int Delete(int Original_TypeId, int Original_TypeIdInGame) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_TypeId));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_TypeIdInGame));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -882,13 +923,14 @@ namespace Eve_Market_Data._Eve_Market_Data_TypeContextDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string TypeName) {
+        public virtual int Insert(string TypeName, int TypeIdInGame) {
             if ((TypeName == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.InsertCommand.Parameters[0].Value = ((string)(TypeName));
             }
+            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(TypeIdInGame));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -909,15 +951,17 @@ namespace Eve_Market_Data._Eve_Market_Data_TypeContextDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string TypeName, int Original_TypeId, int TypeId) {
+        public virtual int Update(string TypeName, int TypeIdInGame, int Original_TypeId, int Original_TypeIdInGame, int TypeId) {
             if ((TypeName == null)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(TypeName));
             }
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Original_TypeId));
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(TypeId));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(TypeIdInGame));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Original_TypeId));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_TypeIdInGame));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(TypeId));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -938,8 +982,8 @@ namespace Eve_Market_Data._Eve_Market_Data_TypeContextDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string TypeName, int Original_TypeId) {
-            return this.Update(TypeName, Original_TypeId, Original_TypeId);
+        public virtual int Update(string TypeName, int TypeIdInGame, int Original_TypeId, int Original_TypeIdInGame) {
+            return this.Update(TypeName, TypeIdInGame, Original_TypeId, Original_TypeIdInGame, Original_TypeId);
         }
     }
     

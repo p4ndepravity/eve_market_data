@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.IO;
 using System.Net;
 using System.Runtime.CompilerServices;
@@ -22,17 +23,18 @@ namespace Eve_Market_Data
         static string HIST_ROUTE = API_BASE + "market/10000002/history/?type=" + ITEM_ROUTE;
         static string ALL_ORDERS_ROUTE = API_BASE + "market/10000002/orders/all/";
         static int[] ITEM_ID_RANGE = { 2, 200 };
+        DatabaseInterface db;
 
         public Main()
         {
             InitializeComponent();
             BasicConfigurator.Configure();
+            typesTableAdapter.Fill(_Eve_Market_Data_TypeContextDataSet.Types);
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the '_Eve_Market_Data_TypeContextDataSet.Types' table. You can move, or remove it, as needed.
-            typesTableAdapter.Fill(_Eve_Market_Data_TypeContextDataSet.Types);
 
             itemLoadProgressBarBGW.RunWorkerAsync();
 
@@ -96,6 +98,7 @@ namespace Eve_Market_Data
         {
             using (TextFieldParser parser = new TextFieldParser("eve_market_items.csv"))
             {
+                db = new DatabaseInterface();
                 uiProgressBar.Value = 0;
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters(",");
@@ -104,7 +107,13 @@ namespace Eve_Market_Data
                     string[] fields = parser.ReadFields();
                     if (fields[0] == "typeID" || fields[0] == "") continue;
                     object[] data = { int.Parse(fields[0]), fields[2] };
-                    Invoke((MethodInvoker)delegate {  });
+                    db.Add(new Type { TypeIdInGame = (int)data[0], TypeName = (string)data[1] });
+                    Invoke((MethodInvoker)delegate
+                    {
+                        typesTableAdapter.Fill(_Eve_Market_Data_TypeContextDataSet.Types);
+                        itemsList.DataSource = typesBindingSource;
+                        itemsList.Refresh();
+                    });
                     log.Debug(InfoPrepender(string.Format("Adding ({0}){1} to data grid in row {2}", fields[0], fields[2], itemsList.Rows.Count)));
                     itemLoadProgressBarBGW.ReportProgress((int)((itemsList.Rows.Count / 8490.0) * 100.0));
                 }

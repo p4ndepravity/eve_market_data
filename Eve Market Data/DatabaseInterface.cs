@@ -1,12 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Eve_Market_Data
 {
     class DatabaseInterface
     {
+        public void Add(object thing)
+        {
+            List<object> objects = new List<object>();
+            objects.Add(thing);
+            if (objects.OfType<Type>() != null) InsertType((Type)thing);
+        }
+
+        private void InsertType(Type type)
+        {
+            using (var db = new TypeContext())
+            {
+                db.Types.Add(type);
+                db.SaveChanges();
+            }
+        }
     }
 }
