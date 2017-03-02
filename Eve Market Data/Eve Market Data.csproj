@@ -94,6 +94,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Type.cs" />
+    <Compile Include="_Eve_Market_Data_TypeContextDataSet.cs">
+      <DependentUpon>_Eve_Market_Data_TypeContextDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="_Eve_Market_Data_TypeContextDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -36,6 +36,8 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemsList = new System.Windows.Forms.DataGridView();
+            this.typesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this._Eve_Market_Data_TypeContextDataSet = new Eve_Market_Data._Eve_Market_Data_TypeContextDataSet();
             this.filterBox = new System.Windows.Forms.GroupBox();
             this.marginFilterPanel = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -45,22 +47,21 @@
             this.uiProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.itemLoadProgressBarBGW = new System.ComponentModel.BackgroundWorker();
             this.marginBGW = new System.ComponentModel.BackgroundWorker();
-            this.typesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this._Eve_Market_Data_TypeContextDataSet = new Eve_Market_Data._Eve_Market_Data_TypeContextDataSet();
             this.typesTableAdapter = new Eve_Market_Data._Eve_Market_Data_TypeContextDataSetTableAdapters.TypesTableAdapter();
             this.tableAdapterManager = new Eve_Market_Data._Eve_Market_Data_TypeContextDataSetTableAdapters.TableAdapterManager();
-            this.typeIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeIdInGameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.margin_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.volume_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rank_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deleteButton = new System.Windows.Forms.Button();
             this.mainFormMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.typesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._Eve_Market_Data_TypeContextDataSet)).BeginInit();
             this.filterBox.SuspendLayout();
             this.marginFilterPanel.SuspendLayout();
             this.mainStatusStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.typesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._Eve_Market_Data_TypeContextDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // mainFormMenuStrip
@@ -98,7 +99,7 @@
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // helpToolStripMenuItem
@@ -121,7 +122,7 @@
             this.itemsList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.itemsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.itemsList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.typeIdDataGridViewTextBoxColumn,
+            this.typeIdInGameDataGridViewTextBoxColumn,
             this.typeNameDataGridViewTextBoxColumn,
             this.margin_column,
             this.volume_column,
@@ -133,15 +134,27 @@
             this.itemsList.Name = "itemsList";
             this.itemsList.ReadOnly = true;
             this.itemsList.RowHeadersVisible = false;
-            this.itemsList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.itemsList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.itemsList.Size = new System.Drawing.Size(534, 351);
             this.itemsList.StandardTab = true;
             this.itemsList.TabIndex = 1;
+            this.itemsList.VirtualMode = true;
             this.itemsList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsList_CellContentClick);
+            // 
+            // typesBindingSource
+            // 
+            this.typesBindingSource.DataMember = "Types";
+            this.typesBindingSource.DataSource = this._Eve_Market_Data_TypeContextDataSet;
+            // 
+            // _Eve_Market_Data_TypeContextDataSet
+            // 
+            this._Eve_Market_Data_TypeContextDataSet.DataSetName = "_Eve_Market_Data_TypeContextDataSet";
+            this._Eve_Market_Data_TypeContextDataSet.EnforceConstraints = false;
+            this._Eve_Market_Data_TypeContextDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // filterBox
             // 
+            this.filterBox.Controls.Add(this.deleteButton);
             this.filterBox.Controls.Add(this.marginFilterPanel);
             this.filterBox.Location = new System.Drawing.Point(12, 27);
             this.filterBox.Name = "filterBox";
@@ -216,19 +229,9 @@
             this.marginBGW.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.marginBGW_ProgressChanged);
             this.marginBGW.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.marginBGW_RunWorkerCompleted);
             // 
-            // typesBindingSource
-            // 
-            this.typesBindingSource.DataMember = "Types";
-            this.typesBindingSource.DataSource = this._Eve_Market_Data_TypeContextDataSet;
-            // 
-            // _Eve_Market_Data_TypeContextDataSet
-            // 
-            this._Eve_Market_Data_TypeContextDataSet.DataSetName = "_Eve_Market_Data_TypeContextDataSet";
-            this._Eve_Market_Data_TypeContextDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // typesTableAdapter
             // 
-            this.typesTableAdapter.ClearBeforeFill = true;
+            this.typesTableAdapter.ClearBeforeFill = false;
             // 
             // tableAdapterManager
             // 
@@ -236,12 +239,12 @@
             this.tableAdapterManager.TypesTableAdapter = this.typesTableAdapter;
             this.tableAdapterManager.UpdateOrder = Eve_Market_Data._Eve_Market_Data_TypeContextDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
-            // typeIdDataGridViewTextBoxColumn
+            // typeIdInGameDataGridViewTextBoxColumn
             // 
-            this.typeIdDataGridViewTextBoxColumn.DataPropertyName = "TypeIdInGame";
-            this.typeIdDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.typeIdDataGridViewTextBoxColumn.Name = "typeIdDataGridViewTextBoxColumn";
-            this.typeIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.typeIdInGameDataGridViewTextBoxColumn.DataPropertyName = "TypeIdInGame";
+            this.typeIdInGameDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.typeIdInGameDataGridViewTextBoxColumn.Name = "typeIdInGameDataGridViewTextBoxColumn";
+            this.typeIdInGameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // typeNameDataGridViewTextBoxColumn
             // 
@@ -268,6 +271,16 @@
             this.rank_column.Name = "rank_column";
             this.rank_column.ReadOnly = true;
             // 
+            // deleteButton
+            // 
+            this.deleteButton.Location = new System.Drawing.Point(270, 35);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(75, 23);
+            this.deleteButton.TabIndex = 1;
+            this.deleteButton.Text = "Delete All";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            // 
             // Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -284,13 +297,13 @@
             this.mainFormMenuStrip.ResumeLayout(false);
             this.mainFormMenuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.typesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._Eve_Market_Data_TypeContextDataSet)).EndInit();
             this.filterBox.ResumeLayout(false);
             this.marginFilterPanel.ResumeLayout(false);
             this.marginFilterPanel.PerformLayout();
             this.mainStatusStrip.ResumeLayout(false);
             this.mainStatusStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.typesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._Eve_Market_Data_TypeContextDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -318,11 +331,12 @@
         private System.Windows.Forms.BindingSource typesBindingSource;
         private _Eve_Market_Data_TypeContextDataSetTableAdapters.TypesTableAdapter typesTableAdapter;
         private _Eve_Market_Data_TypeContextDataSetTableAdapters.TableAdapterManager tableAdapterManager;
-        private System.Windows.Forms.DataGridViewTextBoxColumn typeIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typeIdInGameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn margin_column;
         private System.Windows.Forms.DataGridViewTextBoxColumn volume_column;
         private System.Windows.Forms.DataGridViewTextBoxColumn rank_column;
+        private System.Windows.Forms.Button deleteButton;
     }
 }
 

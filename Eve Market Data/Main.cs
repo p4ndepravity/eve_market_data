@@ -29,13 +29,10 @@ namespace Eve_Market_Data
         {
             InitializeComponent();
             BasicConfigurator.Configure();
-            typesTableAdapter.Fill(_Eve_Market_Data_TypeContextDataSet.Types);
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the '_Eve_Market_Data_TypeContextDataSet.Types' table. You can move, or remove it, as needed.
-
             itemLoadProgressBarBGW.RunWorkerAsync();
 
             //TODO: get buy orders for item
@@ -102,7 +99,7 @@ namespace Eve_Market_Data
                 uiProgressBar.Value = 0;
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters(",");
-                while (!parser.EndOfData)
+                while (!parser.EndOfData && _Eve_Market_Data_TypeContextDataSet.Types.Count < 200)
                 {
                     string[] fields = parser.ReadFields();
                     if (fields[0] == "typeID" || fields[0] == "") continue;
@@ -111,8 +108,6 @@ namespace Eve_Market_Data
                     Invoke((MethodInvoker)delegate
                     {
                         typesTableAdapter.Fill(_Eve_Market_Data_TypeContextDataSet.Types);
-                        itemsList.DataSource = typesBindingSource;
-                        itemsList.Refresh();
                     });
                     log.Debug(InfoPrepender(string.Format("Adding ({0}){1} to data grid in row {2}", fields[0], fields[2], itemsList.Rows.Count)));
                     itemLoadProgressBarBGW.ReportProgress((int)((itemsList.Rows.Count / 8490.0) * 100.0));
@@ -191,6 +186,13 @@ namespace Eve_Market_Data
         private void marginBGW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
 
+        }
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            log.Debug("Deleting all items. Count before: " + _Eve_Market_Data_TypeContextDataSet.Types.Rows.Count);
+            typesTableAdapter.DeleteAll();
+            log.Debug("Count after: " + _Eve_Market_Data_TypeContextDataSet.Types.Rows.Count);
         }
     }
 }
