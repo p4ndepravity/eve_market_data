@@ -25,6 +25,7 @@ namespace Eve_Market_Data
         static string ALL_ORDERS_ROUTE = API_BASE + "market/10000002/orders/all/";
         static int[] ITEM_ID_RANGE = { 2, 200 };
         DatabaseInterface db;
+        TypeContext _typeContext = new TypeContext();
 
         public Main()
         {
@@ -34,26 +35,16 @@ namespace Eve_Market_Data
 
         private void Main_Load(object sender, EventArgs e)
         {
-            typesTableAdapter.DeleteAll();
-            typesTableAdapter.ClearBeforeFill = true;
-            typesTableAdapter.Fill(_Eve_Market_Data_TypeContextDataSet.Types);
-            typesTableAdapter.ClearBeforeFill = false;
+            db = new DatabaseInterface();
+
+            _typeContext.Types.Load();
+            typesBindingSource.DataSource = _typeContext.Types.Local.ToBindingList();
 
             itemLoadProgressBarBGW.RunWorkerAsync();
 
-            //TODO: get buy orders for item
+            //marginBGW.RunWorkerAsync();
 
-            //TODO: find highest buy order by price
-
-            //TODO: get sell orders for item
-
-            //TODO: get lowest sell order by price
-
-            marginBGW.RunWorkerAsync();
-
-            //TODO: calculate margin, output to data grid
-
-            //TODO: get volume for item, output to data grid
+            //TODO: get history for item, output to data grid
 
         }
 
@@ -105,7 +96,7 @@ namespace Eve_Market_Data
                 uiProgressBar.Value = 0;
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters(",");
-                while (!parser.EndOfData && _Eve_Market_Data_TypeContextDataSet.Types.Count < 200)
+                while (!parser.EndOfData)
                 {
                     string[] fields = parser.ReadFields();
                     if (fields[0] == "typeID" || fields[0] == "") continue;
@@ -113,7 +104,7 @@ namespace Eve_Market_Data
                     db.Add(new Type { TypeIdInGame = (int)data[0], TypeName = (string)data[1] });
                     Invoke((MethodInvoker)delegate
                     {
-                        typesTableAdapter.Fill(_Eve_Market_Data_TypeContextDataSet.Types);
+                        _typeContext.Types.Load();
                     });
                     log.Debug(InfoPrepender(string.Format("Adding ({0}){1} to data grid in row {2}", fields[0], fields[2], itemsList.Rows.Count)));
                     itemLoadProgressBarBGW.ReportProgress((int)((itemsList.Rows.Count / 8490.0) * 100.0));
@@ -173,8 +164,10 @@ namespace Eve_Market_Data
                     double buyPrice = bestBuy - (bestBuy * .01);
                     double sellPrice = bestSell - (bestSell * .01) - (bestSell * .01);
                     double margin = ((sellPrice - buyPrice) / buyPrice) * 100;
+                    margin = Math.Round(margin, 1);
+                    db.UpdateType(itemID, margin);
+                    typesTableAdapter.Fill(_Eve_Market_Data_TypeContextDataSet.Types);
 
-                    //row.Cells[2].Value = Math.Round(margin, 1);
                     //if (margin >= 6) row.Cells[4].Value = 1;
                     //if (margin > 8) row.Cells[4].Value = 2;
                     //if (margin > 10) row.Cells[4].Value = 3;
@@ -185,14 +178,21 @@ namespace Eve_Market_Data
             }
         }
 
-        private void marginBGW_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            _typeContext.Dispose();
         }
 
-        private void marginBGW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void dataGridViewUpdateBGW_DoWork(object sender, DoWorkEventArgs e)
         {
-
+            while (true)
+            {
+                Invoke((MethodInvoker)delegate
+                {
+                    _typeContext.Types.LoadAsync();
+                    itemsList.Refresh();
+                });
+            }
         }
     }
 }

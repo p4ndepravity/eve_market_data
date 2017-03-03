@@ -36,11 +36,16 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemsList = new System.Windows.Forms.DataGridView();
+            this.typeIdInGameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.margin_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.volume_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rank_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this._Eve_Market_Data_TypeContextDataSet = new Eve_Market_Data._Eve_Market_Data_TypeContextDataSet();
             this.filterBox = new System.Windows.Forms.GroupBox();
             this.marginFilterPanel = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.marginFilterText = new System.Windows.Forms.TextBox();
             this.marginFilterLabel = new System.Windows.Forms.Label();
             this.mainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.uiProgressBarStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -49,11 +54,7 @@
             this.marginBGW = new System.ComponentModel.BackgroundWorker();
             this.typesTableAdapter = new Eve_Market_Data._Eve_Market_Data_TypeContextDataSetTableAdapters.TypesTableAdapter();
             this.tableAdapterManager = new Eve_Market_Data._Eve_Market_Data_TypeContextDataSetTableAdapters.TableAdapterManager();
-            this.typeIdInGameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.typeNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.margin_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.volume_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rank_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewUpdateBGW = new System.ComponentModel.BackgroundWorker();
             this.mainFormMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.typesBindingSource)).BeginInit();
@@ -98,7 +99,7 @@
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // helpToolStripMenuItem
@@ -140,6 +141,38 @@
             this.itemsList.VirtualMode = true;
             this.itemsList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsList_CellContentClick);
             // 
+            // typeIdInGameDataGridViewTextBoxColumn
+            // 
+            this.typeIdInGameDataGridViewTextBoxColumn.DataPropertyName = "TypeIdInGame";
+            this.typeIdInGameDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.typeIdInGameDataGridViewTextBoxColumn.Name = "typeIdInGameDataGridViewTextBoxColumn";
+            this.typeIdInGameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // typeNameDataGridViewTextBoxColumn
+            // 
+            this.typeNameDataGridViewTextBoxColumn.DataPropertyName = "TypeName";
+            this.typeNameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.typeNameDataGridViewTextBoxColumn.Name = "typeNameDataGridViewTextBoxColumn";
+            this.typeNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // margin_column
+            // 
+            this.margin_column.HeaderText = "Margin";
+            this.margin_column.Name = "margin_column";
+            this.margin_column.ReadOnly = true;
+            // 
+            // volume_column
+            // 
+            this.volume_column.HeaderText = "Volume";
+            this.volume_column.Name = "volume_column";
+            this.volume_column.ReadOnly = true;
+            // 
+            // rank_column
+            // 
+            this.rank_column.HeaderText = "Rank";
+            this.rank_column.Name = "rank_column";
+            this.rank_column.ReadOnly = true;
+            // 
             // typesBindingSource
             // 
             this.typesBindingSource.DataMember = "Types";
@@ -163,20 +196,20 @@
             // 
             // marginFilterPanel
             // 
-            this.marginFilterPanel.Controls.Add(this.textBox1);
+            this.marginFilterPanel.Controls.Add(this.marginFilterText);
             this.marginFilterPanel.Controls.Add(this.marginFilterLabel);
             this.marginFilterPanel.Location = new System.Drawing.Point(6, 19);
             this.marginFilterPanel.Name = "marginFilterPanel";
             this.marginFilterPanel.Size = new System.Drawing.Size(145, 20);
             this.marginFilterPanel.TabIndex = 0;
             // 
-            // textBox1
+            // marginFilterText
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(45, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 1;
+            this.marginFilterText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.marginFilterText.Location = new System.Drawing.Point(45, 0);
+            this.marginFilterText.Name = "marginFilterText";
+            this.marginFilterText.Size = new System.Drawing.Size(100, 20);
+            this.marginFilterText.TabIndex = 1;
             // 
             // marginFilterLabel
             // 
@@ -224,8 +257,6 @@
             // marginBGW
             // 
             this.marginBGW.DoWork += new System.ComponentModel.DoWorkEventHandler(this.marginBGW_DoWork);
-            this.marginBGW.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.marginBGW_ProgressChanged);
-            this.marginBGW.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.marginBGW_RunWorkerCompleted);
             // 
             // typesTableAdapter
             // 
@@ -237,37 +268,11 @@
             this.tableAdapterManager.TypesTableAdapter = this.typesTableAdapter;
             this.tableAdapterManager.UpdateOrder = Eve_Market_Data._Eve_Market_Data_TypeContextDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
-            // typeIdInGameDataGridViewTextBoxColumn
+            // dataGridViewUpdateBGW
             // 
-            this.typeIdInGameDataGridViewTextBoxColumn.DataPropertyName = "TypeIdInGame";
-            this.typeIdInGameDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.typeIdInGameDataGridViewTextBoxColumn.Name = "typeIdInGameDataGridViewTextBoxColumn";
-            this.typeIdInGameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // typeNameDataGridViewTextBoxColumn
-            // 
-            this.typeNameDataGridViewTextBoxColumn.DataPropertyName = "TypeName";
-            this.typeNameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.typeNameDataGridViewTextBoxColumn.Name = "typeNameDataGridViewTextBoxColumn";
-            this.typeNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // margin_column
-            // 
-            this.margin_column.HeaderText = "Margin";
-            this.margin_column.Name = "margin_column";
-            this.margin_column.ReadOnly = true;
-            // 
-            // volume_column
-            // 
-            this.volume_column.HeaderText = "Volume";
-            this.volume_column.Name = "volume_column";
-            this.volume_column.ReadOnly = true;
-            // 
-            // rank_column
-            // 
-            this.rank_column.HeaderText = "Rank";
-            this.rank_column.Name = "rank_column";
-            this.rank_column.ReadOnly = true;
+            this.dataGridViewUpdateBGW.WorkerReportsProgress = true;
+            this.dataGridViewUpdateBGW.WorkerSupportsCancellation = true;
+            this.dataGridViewUpdateBGW.DoWork += new System.ComponentModel.DoWorkEventHandler(this.dataGridViewUpdateBGW_DoWork);
             // 
             // Main
             // 
@@ -281,6 +286,7 @@
             this.Name = "Main";
             this.ShowIcon = false;
             this.Text = "Eve Market Data";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
             this.mainFormMenuStrip.ResumeLayout(false);
             this.mainFormMenuStrip.PerformLayout();
@@ -312,7 +318,7 @@
         private System.Windows.Forms.StatusStrip mainStatusStrip;
         private System.Windows.Forms.ToolStripStatusLabel uiProgressBarStatusLabel;
         private System.Windows.Forms.ToolStripProgressBar uiProgressBar;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox marginFilterText;
         private System.ComponentModel.BackgroundWorker itemLoadProgressBarBGW;
         private System.ComponentModel.BackgroundWorker marginBGW;
         private _Eve_Market_Data_TypeContextDataSet _Eve_Market_Data_TypeContextDataSet;
@@ -324,6 +330,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn margin_column;
         private System.Windows.Forms.DataGridViewTextBoxColumn volume_column;
         private System.Windows.Forms.DataGridViewTextBoxColumn rank_column;
+        private System.ComponentModel.BackgroundWorker dataGridViewUpdateBGW;
     }
 }
 
