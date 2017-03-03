@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.Data.Entity;
 using System.IO;
 using System.Net;
@@ -33,6 +34,11 @@ namespace Eve_Market_Data
 
         private void Main_Load(object sender, EventArgs e)
         {
+            typesTableAdapter.DeleteAll();
+            typesTableAdapter.ClearBeforeFill = true;
+            typesTableAdapter.Fill(_Eve_Market_Data_TypeContextDataSet.Types);
+            typesTableAdapter.ClearBeforeFill = false;
+
             itemLoadProgressBarBGW.RunWorkerAsync();
 
             //TODO: get buy orders for item
@@ -43,7 +49,7 @@ namespace Eve_Market_Data
 
             //TODO: get lowest sell order by price
 
-            //marginBGW.RunWorkerAsync();
+            marginBGW.RunWorkerAsync();
 
             //TODO: calculate margin, output to data grid
 
@@ -167,13 +173,14 @@ namespace Eve_Market_Data
                     double buyPrice = bestBuy - (bestBuy * .01);
                     double sellPrice = bestSell - (bestSell * .01) - (bestSell * .01);
                     double margin = ((sellPrice - buyPrice) / buyPrice) * 100;
-                    row.Cells[2].Value = Math.Round(margin, 1);
-                    if (margin >= 6) row.Cells[4].Value = 1;
-                    if (margin > 8) row.Cells[4].Value = 2;
-                    if (margin > 10) row.Cells[4].Value = 3;
-                    if (margin > 20) row.Cells[4].Value = 4;
-                    if (margin > 40) row.Cells[4].Value = 5;
-                    if (margin < 6 || margin > 100) row.Cells[4].Value = 0;
+
+                    //row.Cells[2].Value = Math.Round(margin, 1);
+                    //if (margin >= 6) row.Cells[4].Value = 1;
+                    //if (margin > 8) row.Cells[4].Value = 2;
+                    //if (margin > 10) row.Cells[4].Value = 3;
+                    //if (margin > 20) row.Cells[4].Value = 4;
+                    //if (margin > 40) row.Cells[4].Value = 5;
+                    //if (margin < 6 || margin > 100) row.Cells[4].Value = 0;
                 }
             }
         }
@@ -186,13 +193,6 @@ namespace Eve_Market_Data
         private void marginBGW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
 
-        }
-
-        private void deleteButton_Click(object sender, EventArgs e)
-        {
-            log.Debug("Deleting all items. Count before: " + _Eve_Market_Data_TypeContextDataSet.Types.Rows.Count);
-            typesTableAdapter.DeleteAll();
-            log.Debug("Count after: " + _Eve_Market_Data_TypeContextDataSet.Types.Rows.Count);
         }
     }
 }

@@ -54,7 +54,6 @@
             this.margin_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.volume_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rank_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deleteButton = new System.Windows.Forms.Button();
             this.mainFormMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.typesBindingSource)).BeginInit();
@@ -99,7 +98,7 @@
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // helpToolStripMenuItem
@@ -154,7 +153,6 @@
             // 
             // filterBox
             // 
-            this.filterBox.Controls.Add(this.deleteButton);
             this.filterBox.Controls.Add(this.marginFilterPanel);
             this.filterBox.Location = new System.Drawing.Point(12, 27);
             this.filterBox.Name = "filterBox";
@@ -271,16 +269,6 @@
             this.rank_column.Name = "rank_column";
             this.rank_column.ReadOnly = true;
             // 
-            // deleteButton
-            // 
-            this.deleteButton.Location = new System.Drawing.Point(270, 35);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(75, 23);
-            this.deleteButton.TabIndex = 1;
-            this.deleteButton.Text = "Delete All";
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
-            // 
             // Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -336,7 +324,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn margin_column;
         private System.Windows.Forms.DataGridViewTextBoxColumn volume_column;
         private System.Windows.Forms.DataGridViewTextBoxColumn rank_column;
-        private System.Windows.Forms.Button deleteButton;
     }
 }
 

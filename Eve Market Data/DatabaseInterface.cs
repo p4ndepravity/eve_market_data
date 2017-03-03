@@ -20,5 +20,13 @@ namespace Eve_Market_Data
                 db.SaveChanges();
             }
         }
+
+        private void UpdateMargin(int typeId, double margin)
+        {
+            using (var db = new TypeContext())
+            {
+                //db.Types
+            }
+        }
     }
 }
