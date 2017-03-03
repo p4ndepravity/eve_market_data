@@ -94,6 +94,10 @@
     <Compile Include="Migrations\201703022349233_AddMarginToTypes.Designer.cs">
       <DependentUpon>201703022349233_AddMarginToTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703031943339_RemoveKeyFromTypeIdInGame.cs" />
+    <Compile Include="Migrations\201703031943339_RemoveKeyFromTypeIdInGame.Designer.cs">
+      <DependentUpon>201703031943339_RemoveKeyFromTypeIdInGame.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -117,6 +121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703022349233_AddMarginToTypes.resx">
       <DependentUpon>201703022349233_AddMarginToTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703031943339_RemoveKeyFromTypeIdInGame.resx">
+      <DependentUpon>201703031943339_RemoveKeyFromTypeIdInGame.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -36,11 +36,6 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemsList = new System.Windows.Forms.DataGridView();
-            this.typeIdInGameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.typeNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.margin_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.volume_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rank_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this._Eve_Market_Data_TypeContextDataSet = new Eve_Market_Data._Eve_Market_Data_TypeContextDataSet();
             this.filterBox = new System.Windows.Forms.GroupBox();
@@ -55,6 +50,11 @@
             this.typesTableAdapter = new Eve_Market_Data._Eve_Market_Data_TypeContextDataSetTableAdapters.TypesTableAdapter();
             this.tableAdapterManager = new Eve_Market_Data._Eve_Market_Data_TypeContextDataSetTableAdapters.TableAdapterManager();
             this.dataGridViewUpdateBGW = new System.ComponentModel.BackgroundWorker();
+            this.typeIdInGameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.margin_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.volume_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rank_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mainFormMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.typesBindingSource)).BeginInit();
@@ -141,38 +141,6 @@
             this.itemsList.VirtualMode = true;
             this.itemsList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsList_CellContentClick);
             // 
-            // typeIdInGameDataGridViewTextBoxColumn
-            // 
-            this.typeIdInGameDataGridViewTextBoxColumn.DataPropertyName = "TypeIdInGame";
-            this.typeIdInGameDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.typeIdInGameDataGridViewTextBoxColumn.Name = "typeIdInGameDataGridViewTextBoxColumn";
-            this.typeIdInGameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // typeNameDataGridViewTextBoxColumn
-            // 
-            this.typeNameDataGridViewTextBoxColumn.DataPropertyName = "TypeName";
-            this.typeNameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.typeNameDataGridViewTextBoxColumn.Name = "typeNameDataGridViewTextBoxColumn";
-            this.typeNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // margin_column
-            // 
-            this.margin_column.HeaderText = "Margin";
-            this.margin_column.Name = "margin_column";
-            this.margin_column.ReadOnly = true;
-            // 
-            // volume_column
-            // 
-            this.volume_column.HeaderText = "Volume";
-            this.volume_column.Name = "volume_column";
-            this.volume_column.ReadOnly = true;
-            // 
-            // rank_column
-            // 
-            this.rank_column.HeaderText = "Rank";
-            this.rank_column.Name = "rank_column";
-            this.rank_column.ReadOnly = true;
-            // 
             // typesBindingSource
             // 
             this.typesBindingSource.DataMember = "Types";
@@ -181,7 +149,6 @@
             // _Eve_Market_Data_TypeContextDataSet
             // 
             this._Eve_Market_Data_TypeContextDataSet.DataSetName = "_Eve_Market_Data_TypeContextDataSet";
-            this._Eve_Market_Data_TypeContextDataSet.EnforceConstraints = false;
             this._Eve_Market_Data_TypeContextDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // filterBox
@@ -274,6 +241,39 @@
             this.dataGridViewUpdateBGW.WorkerSupportsCancellation = true;
             this.dataGridViewUpdateBGW.DoWork += new System.ComponentModel.DoWorkEventHandler(this.dataGridViewUpdateBGW_DoWork);
             // 
+            // typeIdInGameDataGridViewTextBoxColumn
+            // 
+            this.typeIdInGameDataGridViewTextBoxColumn.DataPropertyName = "TypeIdInGame";
+            this.typeIdInGameDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.typeIdInGameDataGridViewTextBoxColumn.Name = "typeIdInGameDataGridViewTextBoxColumn";
+            this.typeIdInGameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // typeNameDataGridViewTextBoxColumn
+            // 
+            this.typeNameDataGridViewTextBoxColumn.DataPropertyName = "TypeName";
+            this.typeNameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.typeNameDataGridViewTextBoxColumn.Name = "typeNameDataGridViewTextBoxColumn";
+            this.typeNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // margin_column
+            // 
+            this.margin_column.DataPropertyName = "TypeMargin";
+            this.margin_column.HeaderText = "Margin";
+            this.margin_column.Name = "margin_column";
+            this.margin_column.ReadOnly = true;
+            // 
+            // volume_column
+            // 
+            this.volume_column.HeaderText = "Volume";
+            this.volume_column.Name = "volume_column";
+            this.volume_column.ReadOnly = true;
+            // 
+            // rank_column
+            // 
+            this.rank_column.HeaderText = "Rank";
+            this.rank_column.Name = "rank_column";
+            this.rank_column.ReadOnly = true;
+            // 
             // Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -325,12 +325,12 @@
         private System.Windows.Forms.BindingSource typesBindingSource;
         private _Eve_Market_Data_TypeContextDataSetTableAdapters.TypesTableAdapter typesTableAdapter;
         private _Eve_Market_Data_TypeContextDataSetTableAdapters.TableAdapterManager tableAdapterManager;
+        private System.ComponentModel.BackgroundWorker dataGridViewUpdateBGW;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeIdInGameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn margin_column;
         private System.Windows.Forms.DataGridViewTextBoxColumn volume_column;
         private System.Windows.Forms.DataGridViewTextBoxColumn rank_column;
-        private System.ComponentModel.BackgroundWorker dataGridViewUpdateBGW;
     }
 }
 

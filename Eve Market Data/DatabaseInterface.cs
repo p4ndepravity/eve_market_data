@@ -1,11 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace Eve_Market_Data
 {
     class DatabaseInterface
     {
+        public BindingList<Type> GetTypeContextBindingList()
+        {
+            using (var db = new TypeContext())
+            {
+                return db.Types.Local.ToBindingList();
+            }
+        }
+
         public void Add(object thing)
         {
             List<object> objects = new List<object>();
@@ -15,15 +25,31 @@ namespace Eve_Market_Data
 
         public void UpdateType(int typeIdInGame, double newMargin, string newName = null)
         {
+            Type type;
             using (var db = new TypeContext())
             {
-                var result = db.Types.SingleOrDefault(t => t.TypeIdInGame == typeIdInGame);
-                if (result != null)
-                {
-                    if (newName != null) result.TypeName = newName;
-                    result.TypeMargin = newMargin;
-                    db.SaveChanges();
-                }
+                type = db.Types.Where(t => t.TypeIdInGame == typeIdInGame).FirstOrDefault();
+            }
+
+            if (type != null)
+            {
+                type.TypeMargin = newMargin;
+                if (newName != null) type.TypeName = newName;
+            }
+
+            using (var db2 = new TypeContext())
+            {
+                db2.Entry(type).State = EntityState.Modified;
+                db2.SaveChanges();
+                //db2.Types.Load();
+            }
+        }
+
+        internal void ReloadTypeContext()
+        {
+            using (var db = new TypeContext())
+            {
+                db.Types.Load();
             }
         }
 
@@ -33,7 +59,18 @@ namespace Eve_Market_Data
             {
                 db.Types.Add(type);
                 db.SaveChanges();
+                //db.Types.Load();
             }
+        }
+
+        internal object GetTypeObject(int tempId)
+        {
+            Type tempType;
+            using (var db = new TypeContext())
+            {
+                tempType = db.Types.Where(t => t.TypeIdInGame == tempId).FirstOrDefault();
+            }
+            return tempType;
         }
     }
 }
